@@ -1,45 +1,53 @@
+import os
 import csv
 
 candidate = ""
 voter_id = ""
 vote=""
-Correyvote= 0
-Khanvote= 0
+total_votes=""
+Correyvote = 0
+Khanvote = 0
 Livote = 0
 OTooleyvote = 0
-
+number_of_votes_cast = 0
 file_to_open = "election_data.csv"
 
 with open(file_to_open, 'r') as this_csv_file:
-    csv_reader = csv.reader(this_csv_file, delimiter=',')      
-    
+    csv_reader = csv.reader(this_csv_file, delimiter=',')
 
-    for line in csv_reader:    
+    # data = [l for l in csv_reader]
+    data = list(csv_reader)
+    number_of_votes_cast = len(data)
+
+    for line in data:    
         voter_id = line[0]
         vote = line[2]
-        #if voter_id==" * "
-            #number_of_votes_cast=number_of_votes_cast+1
         if vote =="Correy":
-            Correyvote=Correyvote+1
-        if vote =="Khan":
+            Correyvote=Correyvote + 1
+        elif vote =="Khan":
             Khanvote = Khanvote + 1
-        if vote =="Li":
-            Livote = Livote +1
-        if vote =="O'Tooley": 
+        elif vote =="Li":
+            Livote = Livote + 1
+        elif vote =="O'Tooley": 
             OTooleyvote = OTooleyvote + 1
+        correy_percent_of_vote=((Correyvote/number_of_votes_cast)*100)
+        khan_percent_of_vote=((Khanvote/number_of_votes_cast)*100)
+        li_percent_of_vote=((Livote/number_of_votes_cast)*100)
+        otooley_percent_of_vote=((OTooleyvote/number_of_votes_cast)*100)
+        correy_percent_of_vote_rounded="{:.3f}%".format(correy_percent_of_vote)        
+        khan_percent_of_vote_rounded="{:.3f}%".format(khan_percent_of_vote)
+        li_percent_of_vote_rounded="{:.3f}%".format(li_percent_of_vote)
+        otooley_percent_of_vote_rounded="{:.3f}%".format(otooley_percent_of_vote)
 
-      
-  
-  
 print("Election Results")
-print("______________________")
-#print("Total Votes:" + str(number_of_votes_cast))
-print("______________________")   
-print("Correy " + str(Correyvote))
-print("Khan " +str(Khanvote))
-print("Li " +str(Livote))
-print("Otooley " +str(OTooleyvote))
-print("______________________") 
+print("-----------------------")
+print("Total Votes:",(number_of_votes_cast))
+print("-----------------------")  
+print("Correy ",(correy_percent_of_vote_rounded),("({})".format(Correyvote)))
+print("Khan ",(khan_percent_of_vote_rounded),("({})".format(Khanvote)))
+print("Li ",(li_percent_of_vote_rounded),("({})".format(Livote)))
+print("O'Tooley ",(otooley_percent_of_vote_rounded),("({})".format(OTooleyvote)))
+print("-----------------------") 
 if (Correyvote>Khanvote) and (Correyvote>Livote) and (Correyvote>OTooleyvote):
     print("Winner: Correy")
 if (Khanvote>Correyvote) and (Khanvote>Livote) and (Khanvote>OTooleyvote):
