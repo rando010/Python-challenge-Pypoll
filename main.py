@@ -56,3 +56,24 @@ if (Livote>Correyvote) and (Livote>Khanvote) and (Livote>OTooleyvote):
     print("Winner: Li") 
 if (OTooleyvote>Correyvote) and (OTooleyvote>Khanvote) and (OTooleyvote>Livote):
     print("Winner: OTooley")           
+output_path = os.path.join("election_results.csv")
+with open(output_path, 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=',')
+    csvwriter.writerow(['Election Results'])
+    csvwriter.writerow(['-----------------------'])
+    csvwriter.writerow(['Total Votes: ', (number_of_votes_cast)])
+    csvwriter.writerow(['-----------------------'])
+    csvwriter.writerow(['Correy',(correy_percent_of_vote_rounded),(Correyvote)])
+    csvwriter.writerow(['Khan',(khan_percent_of_vote_rounded),(Khanvote)])
+    csvwriter.writerow(['Li',(li_percent_of_vote_rounded),(Livote)])
+    csvwriter.writerow(['OTooley',(otooley_percent_of_vote_rounded),(OTooleyvote)])
+    csvwriter.writerow(['-----------------------'])
+    if (Correyvote>Khanvote) and (Correyvote>Livote) and (Correyvote>OTooleyvote):
+        csvwriter.writerow(['Winner: Correy'])
+    if (Khanvote>Correyvote) and (Khanvote>Livote) and (Khanvote>OTooleyvote):
+        csvwriter.writerow(['Winner: Khan'])
+    if (Livote>Correyvote) and (Livote>Khanvote) and (Livote>OTooleyvote):
+        csvwriter.writerow(['Winner: Li'])
+    if (OTooleyvote>Correyvote) and (OTooleyvote>Khanvote) and (OTooleyvote>Livote):
+        csvwriter.writerow(['Winner: OTooley'])  
+    csvwriter.writerow(['-----------------------'])
